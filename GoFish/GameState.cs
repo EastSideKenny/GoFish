@@ -95,7 +95,13 @@ namespace GoFish
         /// <returns>A string with the winners, an empty string if there are no winners</returns>
         public string CheckForWinner()
         {
-            throw new NotImplementedException();
+            var playerCards = Players.Select(player => player.Hand.Count()).Sum();
+            if (playerCards > 0) return "";
+            GameOver = true;
+            var winningBookCount = Players.Select(player => player.Books.Count()).Max();
+            var winners = Players.Where(player => player.Books.Count() == winningBookCount);
+            if (winners.Count() == 1) return $"The winner is {winners.First().Name}";
+            return $"The winners are {string.Join(" and ", winners)}";
         }
     }
 }

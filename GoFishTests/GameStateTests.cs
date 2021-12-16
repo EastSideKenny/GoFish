@@ -104,5 +104,21 @@ namespace GoFishTests
             Assert.AreEqual(1, owen.Books.Count());
             Assert.AreEqual(2, owen.Hand.Count());
         }
+
+        [TestMethod]
+        public void TestCheckForAWinner()
+        {
+            var computerPlayerNames = new List<string>()
+            {
+                "Computer1",
+                "Computer2",
+                "Computer3",
+            };
+
+            var emptyDeck = new Deck();
+            emptyDeck.Clear();
+            var gameState = new GameState("Human", computerPlayerNames, emptyDeck);
+            Assert.AreEqual("The winners are Human and Computer1 and Computer2 and Computer3", gameState.CheckForWinner());
+        }
     }     
 }
