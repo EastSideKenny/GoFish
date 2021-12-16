@@ -60,8 +60,33 @@ namespace GoFish
         /// <returns>A message that describes what just happened</returns>
         public string PlayRound(Player player, Player playerToAsk, Values valueToAskFor, Deck stock)
         {
-            throw new NotImplementedException();
-        }
+            var valuePlural = (valueToAskFor == Values.Six) ? "Sixes" : $"{valueToAskFor}s";
+            var message = $"{player.Name} asked {playerToAsk.Name}"
+                + $" for {valuePlural}{Environment.NewLine}";
+            var cards = playerToAsk.DoYouHaveAny(valueToAskFor, stock);
+            if (cards.Count() > 0)
+            {
+                player.AddCardsAndPullOutBooks(cards);
+                message += $"{playerToAsk.Name} has {cards.Count()}"
+                            + $"{valueToAskFor} card{Player.S(cards.Count())}";
+            }
+            else if (stock.Count == 0)
+            {
+                message += $"The stock is out of cards";
+            }
+            else
+            {
+                player.DrawCard(stock);
+                message += $"{player.Name} drew a card";
+            }
+            if (player.Hand.Count() == 0)
+            { 
+                player.GetNextHand(stock);
+                message += $"{Environment.NewLine}{player.Name} ran out of cards,"
+                    + $" drew {player.Hand.Count()} from the stock";
+            }
+            return message;
+        } 
 
         /// <summary>
         /// Checks for a winner by seeing if any players have any cards left, sets GameOver
