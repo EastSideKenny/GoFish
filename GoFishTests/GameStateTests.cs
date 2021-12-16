@@ -25,5 +25,24 @@ namespace GoFishTests
 
             Assert.AreEqual(5, gameState.HumanPlayer.Hand.Count());
         }
+
+        [TestMethod]
+        public void TestRandomPlayer()
+        {
+            var computerPlayerNames = new List<string>()
+            {
+                "Computer1",
+                "Computer2",
+                "Computer3",
+            };
+
+            var gameState = new GameState("Human", computerPlayerNames, new Deck());
+            Player.Random = new MockRandom() { ValueToReturn = 1 };
+            Assert.AreEqual("Computer2", gameState.RandomPlayer(gameState.Players.ToList()[0]).Name);
+
+            Player.Random = new MockRandom() { ValueToReturn = 0 };
+            Assert.AreEqual("Human", gameState.RandomPlayer(gameState.Players.ToList()[1]).Name);
+            Assert.AreEqual("Computer1", gameState.RandomPlayer(gameState.Players.ToList()[0]).Name);
+        }
     }     
 }

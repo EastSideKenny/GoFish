@@ -45,7 +45,10 @@ namespace GoFish
         /// <param name="currentPlayer">The current player</param>
         /// <returns>A random player that the current player can ask for a card</returns>
         public Player RandomPlayer(Player currentPlayer) =>
-            throw new NotImplementedException();
+            Players
+            .Where(player => player != currentPlayer)
+            .Skip(Player.Random.Next(Players.Count() - 1))
+            .First();
 
         /// <summary>
         /// Makes one player play a round
