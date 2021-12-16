@@ -68,7 +68,7 @@ namespace GoFish
             {
                 player.AddCardsAndPullOutBooks(cards);
                 message += $"{playerToAsk.Name} has {cards.Count()}"
-                            + $"{valueToAskFor} card{Player.S(cards.Count())}";
+                            + $" {valueToAskFor} card{Player.S(cards.Count())}";
             }
             else if (stock.Count == 0)
             {
