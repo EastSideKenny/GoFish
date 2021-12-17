@@ -21,7 +21,7 @@ namespace GoFishTests
             var gameState = new GameState("Human", computerPlayerNames, new Deck());
 
             CollectionAssert.AreEqual(
-                new List<string> { "Human", "Computer1", "Computer2", "Computer3"},
+                new List<string> { "Human", "Computer1", "Computer2", "Computer3" },
                 gameState.Players.Select(player => player.Name).ToList());
 
             Assert.AreEqual(5, gameState.HumanPlayer.Hand.Count());
@@ -120,5 +120,5 @@ namespace GoFishTests
             var gameState = new GameState("Human", computerPlayerNames, emptyDeck);
             Assert.AreEqual("The winners are Human and Computer1 and Computer2 and Computer3", gameState.CheckForWinner());
         }
-    }     
+    }
 }
